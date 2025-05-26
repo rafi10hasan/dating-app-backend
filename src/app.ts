@@ -22,7 +22,28 @@ const app: Application = express();
 
 // app.post('/webhook', express.raw({ type: 'application/json' }), stripeWebhookHandler);
 // global middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'http://localhost:3002',
+      'http://localhost:3003',
+      'http://localhost:3004',
+      'http://localhost:3005',
+      'http://localhost:3006',
+      'http://localhost:3007',
+      'http://10.0.60.137:4173',
+      'http://localhost:3008',
+      'http://10.0.60.24:4173',
+      'http://localhost:4174',
+      'http://13.49.200.198',
+      'http://52.45.173.22',
+    ],
+    credentials: true,
+  }),
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -56,13 +77,9 @@ app.get('/plan', (_req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-//
-
-//
-
 // Example error logging
 app.get('/error', (_req, _res, next) => {
-  next(new CustomError.BadRequestError('Testin error'));
+  next(new CustomError.BadRequestError('Testing error'));
 });
 
 app.get('/favicon.ico', (_req: Request, res: Response) => {

@@ -15,7 +15,7 @@ const runServer = async () => {
   console.log('\x1b[36mDatabase connection successfull\x1b[0m');
 
   server = app.listen(config.server_port || 5002, () => {
-    console.log(`\x1b[32mServer is listening on port ${config.server_port || 5002}\x1b[0m`);
+    console.log(`\x1b[32mServer is listening on port ${config.server_port || 5020}\x1b[0m`);
   });
 };
 
