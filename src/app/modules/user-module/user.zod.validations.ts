@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const registerUserValidationSchema = z.object({
+const registerUserValidationSchema = z.object({
   body: z.object({
     name: z
       .string({
@@ -31,6 +31,13 @@ export const registerUserValidationSchema = z.object({
       .min(8, 'Password must be at least 8 characters!'),
   }),
 });
+
+
+const userValidationZodSchema = {
+    registerUserValidationSchema
+}
+
+export default userValidationZodSchema
 
 /*
 
