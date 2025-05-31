@@ -3,21 +3,21 @@ import { ENUM_USER_ROLE } from "../../enums/user-role";
 import jwtHelpers from "../../helpers/jwtHelpers";
 import CustomError from "../errors";
 
-const extractTokenFromHeader = (req: Request): string => {
-  const authHeader = req.headers['authorization'];
+export const extractTokenFromHeader = (req: Request): string => {
+  const authHeader =  req.headers.get('authorization');
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) throw new CustomError.UnAuthorizedError('Unauthorized access!');
   return token;
 };
 
-const verifyAccessToken = (token: string) => {
+export const verifyAccessToken = (token: string) => {
   const payload = jwtHelpers.verifyToken(token, config.jwt_access_token_secret);
   if (!payload) throw new CustomError.UnAuthorizedError('Invalid token!');
   return payload;
 };
 
-const getUserByRole = async (payload: any) => {
+export const getUserByRole = async (payload: any) => {
   const { id, role } = payload;
 
   const user = role === ENUM_USER_ROLE.ADMIN || role === ENUM_USER_ROLE.SUPER_ADMIN
@@ -28,7 +28,7 @@ const getUserByRole = async (payload: any) => {
   return user;
 };
 
-const validateUserStatus = (user: any) => {
+export const validateUserStatus = (user: any) => {
   if (user.status === 'disabled') {
     throw new CustomError.BadRequestError('Your current account is disabled!');
   }
@@ -37,7 +37,7 @@ const validateUserStatus = (user: any) => {
   }
 };
 
-const validateUserSpecificChecks = (user: any, payload: any) => {
+export const validateUserSpecificChecks = (user: any, payload: any) => {
   if (
     payload.role !== ENUM_USER_ROLE.ADMIN &&
     payload.role !== ENUM_USER_ROLE.SUPER_ADMIN
@@ -52,7 +52,7 @@ const validateUserSpecificChecks = (user: any, payload: any) => {
   }
 };
 
-const validateUserRole = (role: string, requiredRoles: string[]) => {
+export const validateUserRole = (role: string, requiredRoles: string[]) => {
   if (requiredRoles.length && !requiredRoles.includes(role)) {
     throw new CustomError.ForbiddenError('Forbidden!');
   }
