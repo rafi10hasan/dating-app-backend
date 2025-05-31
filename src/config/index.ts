@@ -22,7 +22,6 @@ const envSchema = z.object({
   
   GMAIL_APP_USER: z.string().email('Invalid email format'),
   GMAIL_APP_PASSWORD: z.string().min(1, 'Gmail app password is required'),
- 
 });
 
 const envVars = envSchema.parse(process.env);

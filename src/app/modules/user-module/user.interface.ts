@@ -22,10 +22,7 @@ interface IUser extends Document {
       type: String,
       default: null,
     },
-  profile: {
-    id: Types.ObjectId;
-    role: string;
-  };
+  profile: Types.ObjectId | null
   createdAt: Date;
   updatedAt: Date;
 

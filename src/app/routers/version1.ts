@@ -1,14 +1,18 @@
 import express from 'express';
+import userRouter from '../modules/user-module/user.routes';
 
 
 const routersVersionOne = express.Router();
 
-// const appRouters = [
- 
-// ];
+const appRouters = [
+    {
+    path: '/user',
+    router: userRouter,
+  },
+];
 
-// appRouters.forEach((router) => {
-//   routersVersionOne.use(router.path, router.router);
-// });
+appRouters.forEach((router) => {
+  routersVersionOne.use(router.path, router.router);
+});
 
 export default routersVersionOne;

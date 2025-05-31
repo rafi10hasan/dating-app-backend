@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import mongoose, { Types } from 'mongoose';
 import validator from 'validator';
 import IUser from './user.interface';
-import { ENUM_USER_ROLE, ENUM_USER_STATUS } from '../../../enums/user-role';
+import { ENUM_USER_STATUS } from '../../../enums/user-role';
 
 export const userSchema = new mongoose.Schema<IUser>(
   {
@@ -69,20 +69,9 @@ export const userSchema = new mongoose.Schema<IUser>(
       type: String,
       default: null,
     },
-    profile: {
-      role: {
-        type: String,
-        enum: {
-          values: [ENUM_USER_ROLE.BUSINESS, ENUM_USER_ROLE.CAR_OWNER, ENUM_USER_ROLE.EMPLOYEE],
-          message: '{VALUE} is not accepted as a role value. Use business/carOwner/employee.',
-        },
-        default: null,
-      },
-      id: {
-        type: mongoose.Types.ObjectId,
-        refPath: 'profile.role',
-        default: null,
-      },
+     profile: {
+        type: Types.ObjectId,
+        ref: 'profile',
     },
   },
   {
