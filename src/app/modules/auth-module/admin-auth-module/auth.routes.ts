@@ -1,12 +1,12 @@
 import express from 'express';
-import authControllers from './auth.controllers';
+import adminAuthControllers from './controller';
 
 const adminAuthRouter = express.Router();
 
-adminAuthRouter.post('/login', authControllers.adminLogin);
-adminAuthRouter.post('/forget-password/send-otp', authControllers.sendOTP);
-adminAuthRouter.post('/verify-otp', authControllers.verifyOTP);
-adminAuthRouter.post('/reset-password', authControllers.resetPassword);
-adminAuthRouter.post('/change-password', authControllers.changePassword);
+adminAuthRouter.post('/login', adminAuthControllers.adminLogin);
+adminAuthRouter.post('/forget-password/send-otp', adminAuthControllers.sendOTP);
+adminAuthRouter.post('/verify-otp', adminAuthControllers.verifyOTP);
+adminAuthRouter.post('/reset-password', adminAuthControllers.resetPassword);
+adminAuthRouter.post('/change-password', adminAuthControllers.changePassword);
 
 export default adminAuthRouter;
