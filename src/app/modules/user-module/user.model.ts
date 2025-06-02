@@ -69,6 +69,10 @@ export const userSchema = new mongoose.Schema<IUser>(
       type: String,
       default: null,
     },
+    role: {
+      type: String,
+      default: "user"
+    },
      profile: {
         type: Types.ObjectId,
         ref: 'profile',

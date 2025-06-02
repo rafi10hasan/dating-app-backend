@@ -9,7 +9,7 @@ import IUser from '../user.interface';
 import User from '../user.model';
 import { IProfile } from './../../profile-module/profile.interface';
 
-const createUser = async (data: IUser & IProfile) => {
+export const createUser = async (data: IUser & IProfile) => {
   const result = await withTransaction(async (session: ClientSession) => {
     try {
       const verificationCode = IdGenerator.generateNumberId();
@@ -71,4 +71,4 @@ const createUser = async (data: IUser & IProfile) => {
   return result; 
 };
 
-export default createUser;
+

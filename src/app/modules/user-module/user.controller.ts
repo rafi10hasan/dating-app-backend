@@ -1,11 +1,13 @@
+import { userServices } from './services/index';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import handleAsync from '../../../shared/handleAsync';
 import sendResponse from '../../../shared/sendResponse';
 import CustomError from '../../errors';
-import createUser from './services/create-user';
 import User from './user.model';
 
+
+// register user
 const registerController = handleAsync(async (req: Request, res: Response) => {
   const userData = req.body;
 
@@ -15,8 +17,8 @@ const registerController = handleAsync(async (req: Request, res: Response) => {
     throw new CustomError.BadRequestError('email or phone already exist');
   }
 
-  const result = await createUser(userData);
-
+  const result = await userServices.createUser(userData);
+  
   sendResponse(res, {
     statusCode: StatusCodes.CREATED,
     status: 'success',
@@ -24,6 +26,10 @@ const registerController = handleAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+
+// get specific user
+
+
 
 export default {
   registerController,
